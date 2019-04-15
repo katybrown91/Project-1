@@ -1,0 +1,33 @@
+h1{
+  text-align: left;
+  font-family: cursive;
+  color: plum;
+}
+
+#game-board {
+  /* padding: 20px 0px;
+  height: 800px;*/
+  display: flex;
+  align-items: center; 
+}
+
+#game-canvas{
+  width: 600px;
+  height: 600px;
+  background-image: url('images/room.png');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items:center;
+}
+
+button{
+  font-size: 30px;
+  background-color: plum;
+  color: #fff;
+  padding: 20px 40px;
+  border: 0;
+  box-shadow: 0;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}

@@ -23,6 +23,7 @@ class Game{
 
 let game = new Game();
 let allCats = [];
+let allAngryCats = [];
 
 
 var canvas = document.getElementById('game-canvas');
@@ -49,7 +50,7 @@ function collisionDetect(object1, object2){
 }
 
 class Cat {
-  constructor() {
+  constructor(width, height, x, y, direction, speed) {
     //this.startingPosition = [10, 70, 130, 190, 250, 310, 370, 430, 490, 550, 610, 670, 730, 790]
     this.width = 50;
     this.height = 70;
@@ -75,16 +76,16 @@ function createCats(){
   // }
   setInterval(() => {
     createCats()
-  },450)
+  },800)
 createCats() 
 makeCats()
 
 function makeCats(){
   createCats();
   createCats();
-  //createCats();
-   //createCats();
-   //createCats();
+  createCats();
+  createCats();
+   createCats();
    //createCats();
    //createCats();
   // createCats();
@@ -116,8 +117,9 @@ function updateAndDrawCats(){
       let didCatsColideWithPlayer = collisionDetect(game.player, cats)
       if(didCatsColideWithPlayer ===true) {
           allCats.splice(i, 1);
+          score++;
       
-
+      }
       //console.log(cats.x)
         //console.log(cats.y)
 
@@ -129,11 +131,6 @@ function updateAndDrawCats(){
         return cats.direction.x = -1*cats.direction.x 
       }
       
-    }
-    }
-
-
-
       //*(Math.floor(Math.random));
       // if(allCats[i].y > 850) {
       //   allCats.splice(i, 1);
@@ -141,16 +138,105 @@ function updateAndDrawCats(){
       //console.log("cat array after the update >>>>>>>> ", allCats.length);
       ctx.drawImage(theImage, cats.x, cats.y, cats.width, cats.height)
     }
-  
+}
 
-/*let score = 0;
+class AngryCat extends Cat {
+  constructor(width, height, x, y, direction, speed) {
+    //this.width = 70;
+    //this.height = 70;
+    //this.x = Math.floor(Math.random()*w)
+    //this.y = Math.floor(Math.random()*h);
+    super(width, height, x, y, direction)
+    this.imgsrc = 'images/black-cat.png';
+    this.ctx = document.getElementById('game-canvas').getContext('2d');
+    //this.direction = {  x:1,  y:1 }
+    this.speed = 0.5;
+    }
+}
+function createAngryCats(){
+  console.log("creating cat <<<<<< ", allAngryCats.length)
+ 
+    allAngryCats.push(new AngryCat())
+    console.log(allAngryCats)
+}
+  setInterval(() => {
+    createAngryCats()
+  },800)
+createAngryCats() 
+makeAngryCats()
+
+function makeAngryCats(){
+  createAngryCats();
+  createAngryCats();
+  createAngryCats();
+}
+var otherImage = new Image()
+otherImage.src = 'images/black-cat.png'
+otherImage.onload = function(){
+  makeAngryCats() 
+}
+
+function updateAndDrawAngryCats(){
+
+  
+    for(let i=0; i<allAngryCats.length; i++){
+
+
+      let angryCats = allAngryCats[i]
+      //console.log(allCats.length)
+      
+
+      angryCats.y += angryCats.direction.y * angryCats.speed;
+      angryCats.x += angryCats.direction.x * angryCats.speed;
+      
+      let didAngryCatsColideWithPlayer = collisionDetect(game.player, angryCats)
+      if(didAngryCatsColideWithPlayer ===true) {
+          allAngryCats.splice(i, 1);
+          score--;
+      
+      }
+    
+
+      if( angryCats.y>canvas.height - angryCats.height || angryCats.y<0  ){ //if the cat exceeds the canvas or is less then zero it's direction reverses
+        return angryCats.direction.y = -1*angryCats.direction.y
+      }
+
+      if( angryCats.x>canvas.width - angryCats.width || angryCats.x<0  ){ 
+        return angryCats.direction.x = -1*angryCats.direction.x 
+      }
+      
+      ctx.drawImage(otherImage, angryCats.x, angryCats.y, angryCats.width, angryCats.height)
+    }
+}
+
+let score = 0;
       
 function drawScore() {
-  ctx.font = "16px Arial";
-  ctx.fillStyle = "#0095DD";
-  ctx.fillText("Score: "+score, 8, 20);
+  ctx.font = "50px Arial";
+  ctx.fillStyle = "plum";
+  ctx.fillText("Score: "+ score, 20, 40);
 }
-*/
+
+function setTimer(){     
+    var sec = 1900;  
+    // var id = window.setInterval(function() {
+        sec--;
+        if (sec < - 1) {
+            clearInterval(id);
+            alert("Game Over!"+" Score:"+  score);
+            return;
+        }        
+    // }, 1000/60)
+      return Math.floor(sec / 32)
+    }
+  
+    function drawTimer() {
+      var sec = 1900;
+      ctx.font = "50px Arial";
+      ctx.fillStyle = "plum";
+      ctx.fillText("Time: " + setTimer(), 500, 40);
+    }
+
 
 
 document.onkeydown = function(e){
@@ -168,7 +254,9 @@ function updateCanvas(){
   ctx.clearRect(0,0,w,h)
   game.player.drawPlayer()
   updateAndDrawCats()
-  //drawScore()
+  updateAndDrawAngryCats()
+  drawScore()
+  drawTimer()
   window.requestAnimationFrame(updateCanvas)
   
 }
