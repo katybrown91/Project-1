@@ -1,3 +1,31 @@
+/*window.addEventListener("keyup", ev => {
+  if (ev.keyCode === 38) {
+    //YOUR CODE HERE
+    
+    //example below
+    //document.body.innerHTML = 'game-canvas';
+    this.ctx = document.getElementById('game-canvas').getContext('2d');
+  }
+});*/
+//var start = document.getElementById("start");
+
+//function initialize(){
+  //start.style.display = 'none';
+
+//}
+
+//var playing = false;
+//var startButton;
+
+document.getElementById("start").onclick = function() {
+  startGame();
+  frames = 0;
+};
+
+function startGame() {
+  draw(160, 460);
+}
+
 class Player {
   constructor() {
     this.width = 100;
@@ -15,6 +43,9 @@ drawPlayer() {
   this.ctx.drawImage(image, this.x, this.y, this.width, this.height);
 }
 }
+
+var sec = 60;
+
 class Game{
   constructor(){
     this.player = new Player();
@@ -76,27 +107,27 @@ function createCats(){
   // }
   setInterval(() => {
     createCats()
-  },800)
-createCats() 
-makeCats()
+  },1500)
+//createCats() 
+//makeCats()
 
-function makeCats(){
-  createCats();
-  createCats();
-  createCats();
-  createCats();
-   createCats();
-   //createCats();
-   //createCats();
-  // createCats();
-   //createCats();
-   //createCats();
+// function makeCats(){
+//   createCats();
+//   createCats();
+//   createCats();
+//   createCats();
+//    createCats();
+//    //createCats();
+//    //createCats();
+//   // createCats();
+//    //createCats();
+//    //createCats();
 
-}
+// }
 var theImage = new Image()
 theImage.src = 'images/Architetto----Gatto.png'
 theImage.onload = function(){
-  makeCats() 
+  //makeCats() 
 }
 
 function updateAndDrawCats(){
@@ -104,6 +135,7 @@ function updateAndDrawCats(){
   //,'images/Architetto----Gatto.png','images/Cat-Pose-2-2015060816.png'
   //,'images/cat-silhouette.png', 'images/CatsLife11.png', 'images/missiridia-Black-and-White-Fluffy-Cat.png';
   
+    console.log(allCats.length)
     for(let i=0; i<allCats.length; i++){
 
 
@@ -136,6 +168,7 @@ function updateAndDrawCats(){
       //   allCats.splice(i, 1);
       // }
       //console.log("cat array after the update >>>>>>>> ", allCats.length);
+      //console.log(theImage)
       ctx.drawImage(theImage, cats.x, cats.y, cats.width, cats.height)
     }
 }
@@ -154,14 +187,18 @@ class AngryCat extends Cat {
     }
 }
 function createAngryCats(){
-  console.log("creating cat <<<<<< ", allAngryCats.length)
- 
-    allAngryCats.push(new AngryCat())
-    console.log(allAngryCats)
+
+  // console.log("creating cat <<<<<< ", allAngryCats.length)
+  
+  allAngryCats.push(new AngryCat())
+  //console.log(allAngryCats)
 }
+// let timer = 0
   setInterval(() => {
     createAngryCats()
-  },800)
+    // timer++
+    // console.log(timer)
+  },1500)
 createAngryCats() 
 makeAngryCats()
 
@@ -217,30 +254,39 @@ function drawScore() {
   ctx.fillText("Score: "+ score, 20, 40);
 }
 
+
+
 function setTimer(){     
-    var sec = 1900;  
+    // var sec = 1900;  
     // var id = window.setInterval(function() {
+      // setInterval(() => {
         sec--;
         if (sec < - 1) {
-            clearInterval(id);
-            alert("Game Over!"+" Score:"+  score);
+            clearInterval();
+            setTimeout(() => {
+              alert("Game Over!"+" Score:"+  score);
+              //console.log("you lost!!!!!!!!!!!!")
+            }, 100)
             return;
-        }        
-    // }, 1000/60)
-      return Math.floor(sec / 32)
+        }     
+      //   setTimer()   
+      // }, 1000)
+      //console.log("This is the timer ============> ", sec);
+    // }, 1500/60)
+      // return Math.floor(sec / 32)
     }
   
     function drawTimer() {
-      var sec = 1900;
+      // var sec = 1900;
       ctx.font = "50px Arial";
       ctx.fillStyle = "plum";
-      ctx.fillText("Time: " + setTimer(), 500, 40);
+      ctx.fillText("Time: " + sec, 500, 40);
     }
 
 
 
 document.onkeydown = function(e){
-  console.log("====", e)
+  //console.log("====", e)
   switch(e.keyCode){
     case 37: game.player.x-=5; console.log("moving left"); break;
     case 38: game.player.y-=5; console.log("moving up"); break;
@@ -262,6 +308,10 @@ function updateCanvas(){
 }
 //createCats()
 updateCanvas()
+setInterval(() => {
+  setTimer()
+}, 1000);
+
 
 
 
