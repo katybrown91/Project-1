@@ -1,7 +1,7 @@
-document.getElementById("start").onclick = function() {
-  startGame();
-  frames = 0;
-};
+// document.getElementById("start").onclick = function() {
+//   // startGame();
+//   frames = 0;
+// };
 
 function startGame() {
   draw(160, 460);
@@ -40,8 +40,8 @@ let allAngryCats = [];
 
 var canvas = document.getElementById('game-canvas');
 var ctx = canvas.getContext('2d');
-let w= 800;
-let h=800;
+let w = 800;
+let h = 600;
 
 var myGameArea ={
   stop: function() {
@@ -66,29 +66,26 @@ class Cat {
     //this.startingPosition = [10, 70, 130, 190, 250, 310, 370, 430, 490, 550, 610, 670, 730, 790]
     this.width = 50;
     this.height = 70;
-    this.x = Math.floor(Math.random()*w)//50;//this.startingPosition[Math.floor(Math.random()*this.startingPosition.length)];
-    this.y = Math.floor(Math.random()*h);
+    this.x = Math.floor(Math.random()*500)//50;//this.startingPosition[Math.floor(Math.random()*this.startingPosition.length)];
+    this.y = Math.floor(Math.random()*500);
     this.imgsrc = 'images/Architetto----Gatto.png';
     this.ctx = document.getElementById('game-canvas').getContext('2d');
-    this.direction = {  x:1,  y:1 }
-    this.speed = 3;
+    this.direction = {  x: Math.random() * (3) - 1,  y: Math.random() * (3) - 1 }
+    this.speed = Math.random() * 4;
     }
 }
 function createCats(){
   console.log("creating cat <<<<<< ", allCats.length)
-  //if(Math.floor(Math.random() * 24) % 6 === 0) {
-    allCats.push(new Cat())
+   allCats.push(new Cat())
     console.log(allCats)
-
-  //}
 }
   // for(let i=0; i<100; i++){
      //allCats.push(new Cat())
   
   // }
-  setInterval(() => {
-    createCats()
-  },1500)
+  // setInterval(() => {
+  //   createCats()
+  // },1500)
 //createCats() 
 //makeCats()
 
@@ -112,9 +109,6 @@ theImage.onload = function(){
 }
 
 function updateAndDrawCats(){
-
-  //,'images/Architetto----Gatto.png','images/Cat-Pose-2-2015060816.png'
-  //,'images/cat-silhouette.png', 'images/CatsLife11.png', 'images/missiridia-Black-and-White-Fluffy-Cat.png';
   
     console.log(allCats.length)
     for(let i=0; i<allCats.length; i++){
@@ -133,8 +127,6 @@ function updateAndDrawCats(){
           score++;
       
       }
-      //console.log(cats.x)
-        //console.log(cats.y)
 
       if( cats.y>canvas.height - cats.height || cats.y<0  ){ //if the cat exceeds the canvas or is less then zero it's direction reverses
         return cats.direction.y = -1*cats.direction.y
@@ -164,7 +156,7 @@ class AngryCat extends Cat {
     this.imgsrc = 'images/black-cat.png';
     this.ctx = document.getElementById('game-canvas').getContext('2d');
     //this.direction = {  x:1,  y:1 }
-    this.speed = 0.5;
+    this.speed = Math.random() * 1;
     }
 }
 function createAngryCats(){
@@ -269,16 +261,16 @@ function setTimer(){
 document.onkeydown = function(e){
   //console.log("====", e)
   switch(e.keyCode){
-    case 37: game.player.x-=5; console.log("moving left"); break;
-    case 38: game.player.y-=5; console.log("moving up"); break;
-    case 39: game.player.x+=5; console.log("moving right"); break;
-    case 40: game.player.y+=5; console.log("moving down"); break;
+    case 37: game.player.x-=20; console.log("moving left"); break;
+    case 38: game.player.y-=20; console.log("moving up"); break;
+    case 39: game.player.x+=20; console.log("moving right"); break;
+    case 40: game.player.y+=20; console.log("moving down"); break;
   }
 } 
 
 function updateCanvas(){
   //console.log('update')
-  ctx.clearRect(0,0,w,h)
+  ctx.clearRect(0,0,w,800)
   game.player.drawPlayer()
   updateAndDrawCats()
   updateAndDrawAngryCats()
@@ -289,12 +281,16 @@ function updateCanvas(){
 }
 //createCats()
 //updateCanvas()
-setInterval(() => {
-  setTimer()
-}, 1000);
 
 document.getElementById('start').onclick= function(){
-  startGame()
+  frames = 0;
+    setInterval(() => {
+      setTimer()
+    }, 1000);
+  // startGame()
+  setInterval(() => {
+    createCats()
+  },1500)
   updateCanvas()
 }
 
