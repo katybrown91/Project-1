@@ -1,22 +1,3 @@
-/*window.addEventListener("keyup", ev => {
-  if (ev.keyCode === 38) {
-    //YOUR CODE HERE
-    
-    //example below
-    //document.body.innerHTML = 'game-canvas';
-    this.ctx = document.getElementById('game-canvas').getContext('2d');
-  }
-});*/
-//var start = document.getElementById("start");
-
-//function initialize(){
-  //start.style.display = 'none';
-
-//}
-
-//var playing = false;
-//var startButton;
-
 document.getElementById("start").onclick = function() {
   startGame();
   frames = 0;
@@ -222,7 +203,7 @@ function updateAndDrawAngryCats(){
 
 
       let angryCats = allAngryCats[i]
-      //console.log(allCats.length)
+
       
 
       angryCats.y += angryCats.direction.y * angryCats.speed;
@@ -259,11 +240,8 @@ function drawScore() {
 
 
 function setTimer(){     
-    // var sec = 1900;  
-    // var id = window.setInterval(function() {
-      // setInterval(() => {
         sec--;
-        if (sec < - 1) {
+        if (sec < 1) {
             clearInterval();
             setTimeout(() => {
               alert("Game Over!"+" Score:"+  score);
