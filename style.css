@@ -1,3 +1,6 @@
+html, body {margin: 0; height: 100%; overflow: hidden}
+
+
 h1, body {
   text-align: center;
   display: flex;
@@ -13,8 +16,6 @@ h4{
 }
 
 #game-board {
-  /* padding: 20px 0px;
-  height: 800px;*/
   display: flex;
   align-items: center; 
 }

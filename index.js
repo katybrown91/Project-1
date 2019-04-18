@@ -1,8 +1,3 @@
-// document.getElementById("start").onclick = function() {
-//   // startGame();
-//   frames = 0;
-// };
-
 function startGame() {
   draw(160, 460);
 }
@@ -63,7 +58,6 @@ function collisionDetect(object1, object2){
 
 class Cat {
   constructor(width, height, x, y, direction, speed) {
-    //this.startingPosition = [10, 70, 130, 190, 250, 310, 370, 430, 490, 550, 610, 670, 730, 790]
     this.width = 50;
     this.height = 70;
     this.x = Math.floor(Math.random()*500)//50;//this.startingPosition[Math.floor(Math.random()*this.startingPosition.length)];
@@ -89,23 +83,10 @@ function createCats(){
 //createCats() 
 //makeCats()
 
-// function makeCats(){
-//   createCats();
-//   createCats();
-//   createCats();
-//   createCats();
-//    createCats();
-//    //createCats();
-//    //createCats();
-//   // createCats();
-//    //createCats();
-//    //createCats();
-
-// }
 var theImage = new Image()
 theImage.src = 'images/Architetto----Gatto.png'
 theImage.onload = function(){
-  //makeCats() 
+
 }
 
 function updateAndDrawCats(){
@@ -136,12 +117,6 @@ function updateAndDrawCats(){
         return cats.direction.x = -1*cats.direction.x 
       }
       
-      //*(Math.floor(Math.random));
-      // if(allCats[i].y > 850) {
-      //   allCats.splice(i, 1);
-      // }
-      //console.log("cat array after the update >>>>>>>> ", allCats.length);
-      //console.log(theImage)
       ctx.drawImage(theImage, cats.x, cats.y, cats.width, cats.height)
     }
 }
@@ -161,10 +136,8 @@ class AngryCat extends Cat {
 }
 function createAngryCats(){
 
-  // console.log("creating cat <<<<<< ", allAngryCats.length)
-  
   allAngryCats.push(new AngryCat())
-  //console.log(allAngryCats)
+ 
 }
 // let timer = 0
 
@@ -238,7 +211,6 @@ function setTimer(){
             setTimeout(() => {
               alert("Game Over!"+" Score:"+  score);
               location.reload()
-              //console.log("you lost!!!!!!!!!!!!")
             }, 100)
             return;
         }     
