@@ -194,14 +194,16 @@ function createAngryCats(){
   //console.log(allAngryCats)
 }
 // let timer = 0
+
+function startGame(){
   setInterval(() => {
     createAngryCats()
     // timer++
     // console.log(timer)
   },1500)
-createAngryCats() 
-makeAngryCats()
-
+  createAngryCats() 
+  makeAngryCats()
+}
 function makeAngryCats(){
   createAngryCats();
   createAngryCats();
@@ -265,6 +267,7 @@ function setTimer(){
             clearInterval();
             setTimeout(() => {
               alert("Game Over!"+" Score:"+  score);
+              location.reload()
               //console.log("you lost!!!!!!!!!!!!")
             }, 100)
             return;
@@ -307,10 +310,15 @@ function updateCanvas(){
   
 }
 //createCats()
-updateCanvas()
+//updateCanvas()
 setInterval(() => {
   setTimer()
 }, 1000);
+
+document.getElementById('start').onclick= function(){
+  startGame()
+  updateCanvas()
+}
 
 
 
