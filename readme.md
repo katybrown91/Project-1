@@ -1,5 +1,5 @@
 This game was made using canvas.
-There are two cat classses as well as a player class being continously updatd on the canvas.
+There are two cat classses as well as a player class being continously updated on the canvas.
 
 Play the game:
 1. Use the arrow keys to move.
